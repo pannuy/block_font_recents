@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2015 at 11:51 AM
+-- Generation Time: Jul 15, 2015 at 01:03 PM
 -- Server version: 5.6.17-log
 -- PHP Version: 5.5.12
 
@@ -687,7 +687,7 @@ CREATE TABLE IF NOT EXISTS `mdl_block_instances` (
   PRIMARY KEY (`id`),
   KEY `mdl_blocinst_parshopagsub_ix` (`parentcontextid`,`showinsubcontexts`,`pagetypepattern`,`subpagepattern`),
   KEY `mdl_blocinst_par_ix` (`parentcontextid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='This table stores block instances. The type of block this is' AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='This table stores block instances. The type of block this is' AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `mdl_block_instances`
@@ -727,7 +727,12 @@ INSERT INTO `mdl_block_instances` (`id`, `blockname`, `parentcontextid`, `showin
 (31, 'search_forums', 41, 0, 'course-view-*', NULL, 'side-post', 0, ''),
 (32, 'news_items', 41, 0, 'course-view-*', NULL, 'side-post', 1, ''),
 (33, 'calendar_upcoming', 41, 0, 'course-view-*', NULL, 'side-post', 2, ''),
-(34, 'recent_activity', 41, 0, 'course-view-*', NULL, 'side-post', 3, '');
+(34, 'recent_activity', 41, 0, 'course-view-*', NULL, 'side-post', 3, ''),
+(35, 'course_list', 2, 0, 'site-index', NULL, 'side-pre', 2, ''),
+(36, 'search_forums', 49, 0, 'course-view-*', NULL, 'side-post', 0, ''),
+(37, 'news_items', 49, 0, 'course-view-*', NULL, 'side-post', 1, ''),
+(38, 'calendar_upcoming', 49, 0, 'course-view-*', NULL, 'side-post', 2, ''),
+(39, 'recent_activity', 49, 0, 'course-view-*', NULL, 'side-post', 3, '');
 
 -- --------------------------------------------------------
 
@@ -971,7 +976,7 @@ CREATE TABLE IF NOT EXISTS `mdl_cache_flags` (
   PRIMARY KEY (`id`),
   KEY `mdl_cachflag_fla_ix` (`flagtype`),
   KEY `mdl_cachflag_nam_ix` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Cache of time-sensitive flags' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Cache of time-sensitive flags' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `mdl_cache_flags`
@@ -982,7 +987,8 @@ INSERT INTO `mdl_cache_flags` (`id`, `flagtype`, `name`, `timemodified`, `value`
 (2, 'accesslib/dirtycontexts', '/1/26', 1435141737, '1', 1435148937),
 (3, 'accesslib/dirtycontexts', '/1/26/27', 1435141850, '1', 1435149050),
 (4, 'accesslib/dirtycontexts', '/1/26/36', 1436943142, '1', 1436950342),
-(5, 'accesslib/dirtycontexts', '/1/26/41', 1436943294, '1', 1436950494);
+(5, 'accesslib/dirtycontexts', '/1/26/41', 1436943294, '1', 1436950494),
+(6, 'accesslib/dirtycontexts', '/1/26/49', 1436958116, '1', 1436965316);
 
 -- --------------------------------------------------------
 
@@ -4562,7 +4568,7 @@ CREATE TABLE IF NOT EXISTS `mdl_context` (
   UNIQUE KEY `mdl_cont_conins_uix` (`contextlevel`,`instanceid`),
   KEY `mdl_cont_ins_ix` (`instanceid`),
   KEY `mdl_cont_pat_ix` (`path`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='one of these must be set' AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='one of these must be set' AUTO_INCREMENT=54 ;
 
 --
 -- Dumping data for table `mdl_context`
@@ -4615,7 +4621,13 @@ INSERT INTO `mdl_context` (`id`, `contextlevel`, `instanceid`, `path`, `depth`) 
 (44, 80, 33, '/1/26/41/44', 4),
 (45, 80, 34, '/1/26/41/45', 4),
 (46, 70, 3, '/1/26/41/46', 4),
-(47, 70, 4, '/1/26/36/47', 4);
+(47, 70, 4, '/1/26/36/47', 4),
+(48, 80, 35, '/1/2/48', 3),
+(49, 50, 5, '/1/26/49', 3),
+(50, 80, 36, '/1/26/49/50', 4),
+(51, 80, 37, '/1/26/49/51', 4),
+(52, 80, 38, '/1/26/49/52', 4),
+(53, 80, 39, '/1/26/49/53', 4);
 
 -- --------------------------------------------------------
 
@@ -4672,7 +4684,7 @@ CREATE TABLE IF NOT EXISTS `mdl_course` (
   KEY `mdl_cour_idn_ix` (`idnumber`),
   KEY `mdl_cour_sho_ix` (`shortname`),
   KEY `mdl_cour_sor_ix` (`sortorder`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Central course table' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Central course table' AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `mdl_course`
@@ -4680,9 +4692,10 @@ CREATE TABLE IF NOT EXISTS `mdl_course` (
 
 INSERT INTO `mdl_course` (`id`, `category`, `sortorder`, `fullname`, `shortname`, `idnumber`, `summary`, `summaryformat`, `format`, `showgrades`, `newsitems`, `startdate`, `marker`, `maxbytes`, `legacyfiles`, `showreports`, `visible`, `visibleold`, `groupmode`, `groupmodeforce`, `defaultgroupingid`, `lang`, `calendartype`, `theme`, `timecreated`, `timemodified`, `requested`, `enablecompletion`, `completionnotify`, `cacherev`) VALUES
 (1, 0, 1, 'Elearning', 'Elearning', '', '<p>Elearning<br></p>', 0, 'site', 1, 3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1435054157, 1435055299, 0, 0, 0, 1436945646),
-(2, 2, 20003, 'K2014', 'K2014', '', '', 1, 'weeks', 1, 5, 1435165200, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1435141848, 1436930178, 0, 0, 0, 1436945646),
-(3, 2, 20002, 'K2015', 'K2015', '', '', 1, 'weeks', 1, 5, 1436979600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1436943140, 1436948796, 0, 0, 0, 1436948796),
-(4, 2, 20001, 'K2016', 'K2016', '', '', 1, 'weeks', 1, 5, 1436979600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1436943293, 1436943293, 0, 0, 0, 1436945646);
+(2, 2, 20004, 'Lập Trình PHP Căn Bản', 'LTPHP - CB', '', '', 1, 'weeks', 1, 5, 1435165200, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1435141848, 1436957994, 0, 0, 0, 1436957994),
+(3, 2, 20003, 'Lập Trình PHP Nâng Cao', 'LTPHP - NC', '', '', 1, 'weeks', 1, 5, 1436979600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1436943140, 1436958025, 0, 0, 0, 1436958025),
+(4, 2, 20002, 'Lập Trình WinDown', 'LTW', '', '', 1, 'weeks', 1, 5, 1436979600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1436943293, 1436958062, 0, 0, 0, 1436958062),
+(5, 2, 20001, 'Lập Trình ASP.NET', 'LTASP', '', '', 1, 'weeks', 1, 5, 1436979600, 0, 0, 0, 0, 1, 1, 0, 0, 0, '', '', '', 1436958114, 1436958114, 0, 0, 0, 1436958116);
 
 -- --------------------------------------------------------
 
@@ -4715,7 +4728,7 @@ CREATE TABLE IF NOT EXISTS `mdl_course_categories` (
 
 INSERT INTO `mdl_course_categories` (`id`, `name`, `idnumber`, `description`, `descriptionformat`, `parent`, `sortorder`, `coursecount`, `visible`, `visibleold`, `timemodified`, `depth`, `path`, `theme`) VALUES
 (1, 'Miscellaneous', NULL, NULL, 0, 0, 10000, 0, 1, 1, 1435054158, 1, '/1', NULL),
-(2, 'Khoa Công Nghệ Thông Tin', '', '<p>Khoa Công Nghệ Thông Tin<br></p><p><span style="color: rgb(51, 51, 51); font-family: ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: bold; letter-spacing: normal; line-height: 20px; orphans: auto; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">Description</span><br></p>', 1, 0, 20000, 3, 1, 1, 1435141737, 1, '/2', NULL);
+(2, 'Khoa Công Nghệ Thông Tin', '', '<p>Khoa Công Nghệ Thông Tin<br></p><p><span style="color: rgb(51, 51, 51); font-family: ''Helvetica Neue'', Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: bold; letter-spacing: normal; line-height: 20px; orphans: auto; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">Description</span><br></p>', 1, 0, 20000, 4, 1, 1, 1435141737, 1, '/2', NULL);
 
 -- --------------------------------------------------------
 
@@ -4815,7 +4828,7 @@ CREATE TABLE IF NOT EXISTS `mdl_course_format_options` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mdl_courformopti_couforsec_uix` (`courseid`,`format`,`sectionid`,`name`),
   KEY `mdl_courformopti_cou_ix` (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores format-specific options for the course or course sect' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Stores format-specific options for the course or course sect' AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `mdl_course_format_options`
@@ -4831,7 +4844,10 @@ INSERT INTO `mdl_course_format_options` (`id`, `courseid`, `format`, `sectionid`
 (7, 3, 'weeks', 0, 'coursedisplay', '0'),
 (8, 4, 'weeks', 0, 'numsections', '10'),
 (9, 4, 'weeks', 0, 'hiddensections', '0'),
-(10, 4, 'weeks', 0, 'coursedisplay', '0');
+(10, 4, 'weeks', 0, 'coursedisplay', '0'),
+(11, 5, 'weeks', 0, 'numsections', '10'),
+(12, 5, 'weeks', 0, 'hiddensections', '0'),
+(13, 5, 'weeks', 0, 'coursedisplay', '0');
 
 -- --------------------------------------------------------
 
@@ -4952,7 +4968,7 @@ CREATE TABLE IF NOT EXISTS `mdl_course_sections` (
   `availability` longtext,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mdl_coursect_cousec_uix` (`course`,`section`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='to define the sections for each course' AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='to define the sections for each course' AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `mdl_course_sections`
@@ -4993,7 +5009,8 @@ INSERT INTO `mdl_course_sections` (`id`, `course`, `section`, `name`, `summary`,
 (32, 3, 7, NULL, '', 1, '', 1, NULL),
 (33, 3, 8, NULL, '', 1, '', 1, NULL),
 (34, 3, 9, NULL, '', 1, '', 1, NULL),
-(35, 3, 10, NULL, '', 1, '', 1, NULL);
+(35, 3, 10, NULL, '', 1, '', 1, NULL),
+(36, 5, 0, NULL, '', 1, '', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -5123,7 +5140,7 @@ CREATE TABLE IF NOT EXISTS `mdl_editor_atto_autosave` (
   `timemodified` bigint(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `mdl_editattoauto_eleconuse_uix` (`elementid`,`contextid`,`userid`,`pagehash`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Draft text that is auto-saved every 5 seconds while an edito' AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Draft text that is auto-saved every 5 seconds while an edito' AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `mdl_editor_atto_autosave`
@@ -5179,7 +5196,7 @@ CREATE TABLE IF NOT EXISTS `mdl_enrol` (
   PRIMARY KEY (`id`),
   KEY `mdl_enro_enr_ix` (`enrol`),
   KEY `mdl_enro_cou_ix` (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Instances of enrolment plugins used in courses, fields marke' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Instances of enrolment plugins used in courses, fields marke' AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `mdl_enrol`
@@ -5187,14 +5204,17 @@ CREATE TABLE IF NOT EXISTS `mdl_enrol` (
 
 INSERT INTO `mdl_enrol` (`id`, `enrol`, `status`, `courseid`, `sortorder`, `name`, `enrolperiod`, `enrolstartdate`, `enrolenddate`, `expirynotify`, `expirythreshold`, `notifyall`, `password`, `cost`, `currency`, `roleid`, `customint1`, `customint2`, `customint3`, `customint4`, `customint5`, `customint6`, `customint7`, `customint8`, `customchar1`, `customchar2`, `customchar3`, `customdec1`, `customdec2`, `customtext1`, `customtext2`, `customtext3`, `customtext4`, `timecreated`, `timemodified`) VALUES
 (1, 'manual', 0, 2, 0, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1435141851, 1435141851),
-(2, 'guest', 0, 2, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1435141851, 1436930178),
+(2, 'guest', 0, 2, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1435141851, 1436957995),
 (3, 'self', 1, 2, 2, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, 0, 0, 0, 1, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1435141851, 1435141851),
 (4, 'manual', 0, 3, 0, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943142, 1436943142),
-(5, 'guest', 1, 3, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943142, 1436948797),
+(5, 'guest', 1, 3, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943142, 1436958025),
 (6, 'self', 1, 3, 2, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, 0, 0, 0, 1, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943142, 1436943142),
 (7, 'manual', 0, 4, 0, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943295, 1436943295),
-(8, 'guest', 1, 4, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943295, 1436943295),
-(9, 'self', 1, 4, 2, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, 0, 0, 0, 1, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943295, 1436943295);
+(8, 'guest', 1, 4, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943295, 1436958063),
+(9, 'self', 1, 4, 2, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, 0, 0, 0, 1, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436943295, 1436943295),
+(10, 'manual', 0, 5, 0, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436958116, 1436958116),
+(11, 'guest', 1, 5, 1, NULL, 0, 0, 0, 0, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436958116, 1436958116),
+(12, 'self', 1, 5, 2, NULL, 0, 0, 0, 0, 86400, 0, NULL, NULL, NULL, 5, 0, 0, 0, 1, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1436958116, 1436958116);
 
 -- --------------------------------------------------------
 
@@ -5890,7 +5910,7 @@ CREATE TABLE IF NOT EXISTS `mdl_files` (
   KEY `mdl_file_con2_ix` (`contextid`),
   KEY `mdl_file_use_ix` (`userid`),
   KEY `mdl_file_ref_ix` (`referencefileid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='description of files, content is stored in sha1 file pool' AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `mdl_files`
@@ -5915,12 +5935,27 @@ INSERT INTO `mdl_files` (`id`, `contenthash`, `pathnamehash`, `contextid`, `comp
 (16, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'ca842ac112a75bebba720447fa18753c6bcb5806', 5, 'user', 'draft', 334564209, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436930170, 1436930170, 0, NULL),
 (17, 'd37b396d50042eee827e6e1ac8ef42f89821082e', 'ef9186b0e462c3cc93ad023a0db066cfe298659a', 1, 'core', 'preview', 0, '/thumb/', 'e4da866c60449f93a87874b3e73e2e0d0436b79c', NULL, 9204, 'image/png', 0, NULL, NULL, NULL, 1436930172, 1436930172, 0, NULL),
 (18, 'e4da866c60449f93a87874b3e73e2e0d0436b79c', 'f220c4048ba990225458aa6db06650d9a8fe366c', 27, 'course', 'overviewfiles', 0, '/', 'hinh1.jpg', 2, 58817, 'image/jpeg', 0, 'hinh1.jpg', 'Admin User', 'allrightsreserved', 1436930170, 1436930178, 0, NULL),
-(19, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '82416ee08bf28241281771a1012cd595c6dc895d', 27, 'course', 'overviewfiles', 0, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436930170, 1436930178, 0, NULL),
+(19, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '82416ee08bf28241281771a1012cd595c6dc895d', 27, 'course', 'overviewfiles', 0, '/', '.', 2, 0, 'document/unknown', 0, NULL, NULL, NULL, 1436930170, 1436957971, 0, NULL),
 (20, '4c2618d688febcf2c5ba18ad564c105e8383429f', 'f31a003b863472f3724115425f415571a7fa95fd', 5, 'user', 'draft', 545227051, '/', 'hinh3.jpg', 2, 36419, 'image/jpeg', 0, 'O:8:"stdClass":1:{s:6:"source";s:9:"hinh3.jpg";}', 'Admin User', 'allrightsreserved', 1436948792, 1436948792, 0, NULL),
 (21, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'd996cdb6bf9bb640a4ccb7aaac11a5266b1d0457', 5, 'user', 'draft', 545227051, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436948792, 1436948792, 0, NULL),
 (22, '79aecaae5e3705dd981a12fa8e596dbc7f2bb815', '64c6f326ab16bdcc87ca3991d259c1671681e757', 1, 'core', 'preview', 0, '/thumb/', '4c2618d688febcf2c5ba18ad564c105e8383429f', NULL, 7088, 'image/png', 0, NULL, NULL, NULL, 1436948794, 1436948794, 0, NULL),
 (23, '4c2618d688febcf2c5ba18ad564c105e8383429f', '992bffed9a1f66f6503b4e69fac178031063c2bf', 36, 'course', 'overviewfiles', 0, '/', 'hinh3.jpg', 2, 36419, 'image/jpeg', 0, 'hinh3.jpg', 'Admin User', 'allrightsreserved', 1436948792, 1436948796, 0, NULL),
-(24, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'efd71280fe19db7f625e9e7db8c41012d36238e7', 36, 'course', 'overviewfiles', 0, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436948792, 1436948796, 0, NULL);
+(24, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'efd71280fe19db7f625e9e7db8c41012d36238e7', 36, 'course', 'overviewfiles', 0, '/', '.', 2, 0, 'document/unknown', 0, NULL, NULL, NULL, 1436948792, 1436958003, 0, NULL),
+(25, '0e077f66b6cef27d52a67d952cecf41369741bfb', 'c62017fbe2f7d3e213bdbd9a3cf617e5a8d403cf', 5, 'user', 'draft', 369323731, '/', 'hinh4.jpg', 2, 68734, 'image/jpeg', 0, 'O:8:"stdClass":1:{s:6:"source";s:9:"hinh4.jpg";}', 'Admin User', 'allrightsreserved', 1436957093, 1436957093, 0, NULL),
+(26, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '1951093a33fff259dac6d4d6647570da8750f024', 5, 'user', 'draft', 369323731, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436957093, 1436957093, 0, NULL),
+(27, '116a25877300ac48a90bd6f472a2c4d457a6ae46', 'a871e3d6177dc83300fe97bf9c6537c7e3ba6daf', 1, 'core', 'preview', 0, '/thumb/', '0e077f66b6cef27d52a67d952cecf41369741bfb', NULL, 19268, 'image/png', 0, NULL, NULL, NULL, 1436957095, 1436957095, 0, NULL),
+(28, '0e077f66b6cef27d52a67d952cecf41369741bfb', 'a202e51b9028a09c14e27169c25a381e0107a363', 41, 'course', 'overviewfiles', 0, '/', 'hinh4.jpg', 2, 68734, 'image/jpeg', 0, 'hinh4.jpg', 'Admin User', 'allrightsreserved', 1436957093, 1436957107, 0, NULL),
+(29, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'f91d5eeaf3c7532743b4d11236559c4a8a9cd7d6', 41, 'course', 'overviewfiles', 0, '/', '.', 2, 0, 'document/unknown', 0, NULL, NULL, NULL, 1436957093, 1436958034, 0, NULL),
+(30, 'e4da866c60449f93a87874b3e73e2e0d0436b79c', '9007bcb467558b9b2018f67e4af98995f2f3f283', 5, 'user', 'draft', 475219727, '/', 'hinh1.jpg', 2, 58817, 'image/jpeg', 0, 'O:8:"stdClass":2:{s:6:"source";s:9:"hinh1.jpg";s:8:"original";s:220:"YTo2OntzOjk6ImNvbnRleHRpZCI7aToyNztzOjk6ImNvbXBvbmVudCI7czo2OiJjb3Vyc2UiO3M6NjoiaXRlbWlkIjtpOjA7czo4OiJmaWxlYXJlYSI7czoxMzoib3ZlcnZpZXdmaWxlcyI7czo4OiJmaWxlcGF0aCI7czoxOiIvIjtzOjg6ImZpbGVuYW1lIjtzOjk6ImhpbmgxLmpwZyI7fQ==";}', 'Admin User', 'allrightsreserved', 1436930170, 1436930178, 0, NULL),
+(31, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '5eafe06fc026adca13f80b5d7dd178e07239cfb8', 5, 'user', 'draft', 475219727, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436957971, 1436957971, 0, NULL),
+(32, '4c2618d688febcf2c5ba18ad564c105e8383429f', '4e8834aaa519363df32bef9f243501bbec22765d', 5, 'user', 'draft', 618133545, '/', 'hinh3.jpg', 2, 36419, 'image/jpeg', 0, 'O:8:"stdClass":2:{s:6:"source";s:9:"hinh3.jpg";s:8:"original";s:220:"YTo2OntzOjk6ImNvbnRleHRpZCI7aTozNjtzOjk6ImNvbXBvbmVudCI7czo2OiJjb3Vyc2UiO3M6NjoiaXRlbWlkIjtpOjA7czo4OiJmaWxlYXJlYSI7czoxMzoib3ZlcnZpZXdmaWxlcyI7czo4OiJmaWxlcGF0aCI7czoxOiIvIjtzOjg6ImZpbGVuYW1lIjtzOjk6ImhpbmgzLmpwZyI7fQ==";}', 'Admin User', 'allrightsreserved', 1436948792, 1436948796, 0, NULL),
+(33, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'f2e4575213d588faed94cc1c50a22bb5af702202', 5, 'user', 'draft', 618133545, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436958003, 1436958003, 0, NULL),
+(34, '0e077f66b6cef27d52a67d952cecf41369741bfb', 'c6612f18b40981821ccdf7ce185cdb168b07465c', 5, 'user', 'draft', 965515136, '/', 'hinh4.jpg', 2, 68734, 'image/jpeg', 0, 'O:8:"stdClass":2:{s:6:"source";s:9:"hinh4.jpg";s:8:"original";s:220:"YTo2OntzOjk6ImNvbnRleHRpZCI7aTo0MTtzOjk6ImNvbXBvbmVudCI7czo2OiJjb3Vyc2UiO3M6NjoiaXRlbWlkIjtpOjA7czo4OiJmaWxlYXJlYSI7czoxMzoib3ZlcnZpZXdmaWxlcyI7czo4OiJmaWxlcGF0aCI7czoxOiIvIjtzOjg6ImZpbGVuYW1lIjtzOjk6Imhpbmg0LmpwZyI7fQ==";}', 'Admin User', 'allrightsreserved', 1436957093, 1436957107, 0, NULL),
+(35, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '37a325cabf71ff15797c669e1fe31148a149beb3', 5, 'user', 'draft', 965515136, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436958034, 1436958034, 0, NULL),
+(36, '4c2618d688febcf2c5ba18ad564c105e8383429f', '66d182f02b2be2dfcf4c2b546caaf0d21c3ed408', 5, 'user', 'draft', 866485595, '/', 'hinh3.jpg', 2, 36419, 'image/jpeg', 0, 'O:8:"stdClass":1:{s:6:"source";s:9:"hinh3.jpg";}', 'Admin User', 'allrightsreserved', 1436958110, 1436958110, 0, NULL),
+(37, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'df58990ee93984c5f65354ff6df4a2ee96286942', 5, 'user', 'draft', 866485595, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436958110, 1436958110, 0, NULL),
+(38, '4c2618d688febcf2c5ba18ad564c105e8383429f', '324f3b1017204efe64900253c3cdd27b46f2478e', 49, 'course', 'overviewfiles', 0, '/', 'hinh3.jpg', 2, 36419, 'image/jpeg', 0, 'hinh3.jpg', 'Admin User', 'allrightsreserved', 1436958110, 1436958115, 0, NULL),
+(39, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '211fad380c508f65f5cc27d57fe99ee8d2aab957', 49, 'course', 'overviewfiles', 0, '/', '.', 2, 0, NULL, 0, NULL, NULL, NULL, 1436958110, 1436958115, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -7420,7 +7455,7 @@ CREATE TABLE IF NOT EXISTS `mdl_logstore_standard_log` (
   KEY `mdl_logsstanlog_tim_ix` (`timecreated`),
   KEY `mdl_logsstanlog_couanotim_ix` (`courseid`,`anonymous`,`timecreated`),
   KEY `mdl_logsstanlog_useconconcr_ix` (`userid`,`contextlevel`,`contextinstanceid`,`crud`,`edulevel`,`timecreated`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Standard log table' AUTO_INCREMENT=249 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Standard log table' AUTO_INCREMENT=297 ;
 
 --
 -- Dumping data for table `mdl_logstore_standard_log`
@@ -7674,7 +7709,55 @@ INSERT INTO `mdl_logstore_standard_log` (`id`, `eventname`, `component`, `action
 (245, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436948804, 'web', '0:0:0:0:0:0:0:1', NULL),
 (246, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 27, 50, 2, 2, 2, NULL, 0, 'N;', 1436952458, 'web', '0:0:0:0:0:0:0:1', NULL),
 (247, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 27, 50, 2, 2, 2, NULL, 0, 'N;', 1436952471, 'web', '0:0:0:0:0:0:0:1', NULL),
-(248, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436952520, 'web', '0:0:0:0:0:0:0:1', NULL);
+(248, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436952520, 'web', '0:0:0:0:0:0:0:1', NULL),
+(249, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436954680, 'web', '0:0:0:0:0:0:0:1', NULL),
+(250, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436954682, 'web', '0:0:0:0:0:0:0:1', NULL),
+(251, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436954749, 'web', '0:0:0:0:0:0:0:1', NULL),
+(252, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436954783, 'web', '0:0:0:0:0:0:0:1', NULL),
+(253, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955068, 'web', '0:0:0:0:0:0:0:1', NULL),
+(254, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955308, 'web', '0:0:0:0:0:0:0:1', NULL),
+(255, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955340, 'web', '0:0:0:0:0:0:0:1', NULL),
+(256, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955728, 'web', '0:0:0:0:0:0:0:1', NULL),
+(257, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955734, 'web', '0:0:0:0:0:0:0:1', NULL),
+(258, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955753, 'web', '0:0:0:0:0:0:0:1', NULL),
+(259, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436955808, 'web', '0:0:0:0:0:0:0:1', NULL),
+(260, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956050, 'web', '0:0:0:0:0:0:0:1', NULL),
+(261, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956175, 'web', '0:0:0:0:0:0:0:1', NULL),
+(262, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956208, 'web', '0:0:0:0:0:0:0:1', NULL),
+(263, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956237, 'web', '0:0:0:0:0:0:0:1', NULL),
+(264, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956354, 'web', '0:0:0:0:0:0:0:1', NULL),
+(265, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956366, 'web', '0:0:0:0:0:0:0:1', NULL),
+(266, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956618, 'web', '0:0:0:0:0:0:0:1', NULL),
+(267, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956685, 'web', '0:0:0:0:0:0:0:1', NULL),
+(268, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956775, 'web', '0:0:0:0:0:0:0:1', NULL),
+(269, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436956881, 'web', '0:0:0:0:0:0:0:1', NULL),
+(270, '\\core\\event\\course_updated', 'core', 'updated', 'course', 'course', 4, 'u', 1, 41, 50, 4, 2, 4, NULL, 0, 'a:2:{s:9:"shortname";s:5:"K2016";s:8:"fullname";s:5:"K2016";}', 1436957108, 'web', '0:0:0:0:0:0:0:1', NULL),
+(271, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957116, 'web', '0:0:0:0:0:0:0:1', NULL),
+(272, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957120, 'web', '0:0:0:0:0:0:0:1', NULL),
+(273, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957140, 'web', '0:0:0:0:0:0:0:1', NULL),
+(274, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957144, 'web', '0:0:0:0:0:0:0:1', NULL),
+(275, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957150, 'web', '0:0:0:0:0:0:0:1', NULL),
+(276, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957161, 'web', '0:0:0:0:0:0:0:1', NULL),
+(277, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957182, 'web', '0:0:0:0:0:0:0:1', NULL),
+(278, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957195, 'web', '0:0:0:0:0:0:0:1', NULL),
+(279, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957305, 'web', '0:0:0:0:0:0:0:1', NULL),
+(280, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957322, 'web', '0:0:0:0:0:0:0:1', NULL),
+(281, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957333, 'web', '0:0:0:0:0:0:0:1', NULL),
+(282, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957352, 'web', '0:0:0:0:0:0:0:1', NULL),
+(283, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957373, 'web', '0:0:0:0:0:0:0:1', NULL),
+(284, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957485, 'web', '0:0:0:0:0:0:0:1', NULL),
+(285, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957496, 'web', '0:0:0:0:0:0:0:1', NULL),
+(286, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957526, 'web', '0:0:0:0:0:0:0:1', NULL),
+(287, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957539, 'web', '0:0:0:0:0:0:0:1', NULL),
+(288, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957550, 'web', '0:0:0:0:0:0:0:1', NULL),
+(289, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957579, 'web', '0:0:0:0:0:0:0:1', NULL),
+(290, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957670, 'web', '0:0:0:0:0:0:0:1', NULL),
+(291, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436957704, 'web', '0:0:0:0:0:0:0:1', NULL),
+(292, '\\core\\event\\course_updated', 'core', 'updated', 'course', 'course', 2, 'u', 1, 27, 50, 2, 2, 2, NULL, 0, 'a:2:{s:9:"shortname";s:10:"LTPHP - CB";s:8:"fullname";s:27:"Lập Trình PHP Căn Bản";}', 1436957995, 'web', '0:0:0:0:0:0:0:1', NULL),
+(293, '\\core\\event\\course_updated', 'core', 'updated', 'course', 'course', 3, 'u', 1, 36, 50, 3, 2, 3, NULL, 0, 'a:2:{s:9:"shortname";s:10:"LTPHP - NC";s:8:"fullname";s:26:"Lập Trình PHP Nâng Cao";}', 1436958026, 'web', '0:0:0:0:0:0:0:1', NULL),
+(294, '\\core\\event\\course_updated', 'core', 'updated', 'course', 'course', 4, 'u', 1, 41, 50, 4, 2, 4, NULL, 0, 'a:2:{s:9:"shortname";s:3:"LTW";s:8:"fullname";s:20:"Lập Trình WinDown";}', 1436958063, 'web', '0:0:0:0:0:0:0:1', NULL),
+(295, '\\core\\event\\course_created', 'core', 'created', 'course', 'course', 5, 'c', 1, 49, 50, 5, 2, 5, NULL, 0, 'a:2:{s:9:"shortname";s:5:"LTASP";s:8:"fullname";s:20:"Lập Trình ASP.NET";}', 1436958116, 'web', '0:0:0:0:0:0:0:1', NULL),
+(296, '\\core\\event\\course_viewed', 'core', 'viewed', 'course', NULL, NULL, 'r', 2, 2, 50, 1, 2, 1, NULL, 0, 'N;', 1436958124, 'web', '0:0:0:0:0:0:0:1', NULL);
 
 -- --------------------------------------------------------
 
@@ -11567,7 +11650,7 @@ INSERT INTO `mdl_sessions` (`id`, `state`, `sid`, `userid`, `sessdata`, `timecre
 (6, 0, 'kghfp2neqgfhfon67aukovo2u5', 2, NULL, 1435130895, 1435149864, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1'),
 (8, 0, 'qqga8haqdlv9a36lrvgp7upu23', 2, NULL, 1435144368, 1435144369, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1'),
 (9, 0, '7hau7pkcb1mesasui201v9fbd3', 0, NULL, 1436876854, 1436876858, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1'),
-(11, 0, 'uvkspsqi9l2r6p5onjuroc95i1', 2, NULL, 1436925242, 1436952520, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1');
+(11, 0, 'uvkspsqi9l2r6p5onjuroc95i1', 2, NULL, 1436925242, 1436958110, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1');
 
 -- --------------------------------------------------------
 
@@ -13344,7 +13427,7 @@ CREATE TABLE IF NOT EXISTS `mdl_user` (
 
 INSERT INTO `mdl_user` (`id`, `auth`, `confirmed`, `policyagreed`, `deleted`, `suspended`, `mnethostid`, `username`, `password`, `idnumber`, `firstname`, `lastname`, `email`, `emailstop`, `icq`, `skype`, `yahoo`, `aim`, `msn`, `phone1`, `phone2`, `institution`, `department`, `address`, `city`, `country`, `lang`, `calendartype`, `theme`, `timezone`, `firstaccess`, `lastaccess`, `lastlogin`, `currentlogin`, `lastip`, `secret`, `picture`, `url`, `description`, `descriptionformat`, `mailformat`, `maildigest`, `maildisplay`, `autosubscribe`, `trackforums`, `timecreated`, `timemodified`, `trustbitmask`, `imagealt`, `lastnamephonetic`, `firstnamephonetic`, `middlename`, `alternatename`) VALUES
 (1, 'manual', 1, 0, 0, 0, 1, 'guest', '$2y$10$vqc8pcHDCBjFciI6ZP368eNgG4be8WxIVY73P6RH49Khj6OAwQL/K', '', 'Guest user', ' ', 'root@localhost', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'en', 'gregorian', '', '99', 0, 0, 0, 0, '', '', 0, '', 'This user is a special user that allows read-only access to some courses.', 1, 1, 0, 2, 1, 0, 0, 1435054160, 0, NULL, NULL, NULL, NULL, NULL),
-(2, 'manual', 1, 0, 0, 0, 1, 'admin', '$2y$10$GuO3g4zeSIchq7.Ft4XIrOZdl8DVBOsezmiHJD1nKygS5HHW9tiTS', '', 'Admin', 'User', 'ptnhuan@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'en', 'gregorian', '', 'Asia/Ho_Chi_Minh', 1435054829, 1436952520, 1435144368, 1436925242, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 0, 1, 0, 0, 1435055101, 0, NULL, '', '', '', '');
+(2, 'manual', 1, 0, 0, 0, 1, 'admin', '$2y$10$GuO3g4zeSIchq7.Ft4XIrOZdl8DVBOsezmiHJD1nKygS5HHW9tiTS', '', 'Admin', 'User', 'ptnhuan@gmail.com', 0, '', '', '', '', '', '', '', '', '', '', '', '', 'en', 'gregorian', '', 'Asia/Ho_Chi_Minh', 1435054829, 1436958110, 1435144368, 1436925242, '0:0:0:0:0:0:0:1', '', 0, '', '', 1, 1, 0, 0, 1, 0, 0, 1435055101, 0, NULL, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -13474,9 +13557,9 @@ CREATE TABLE IF NOT EXISTS `mdl_user_lastaccess` (
 --
 
 INSERT INTO `mdl_user_lastaccess` (`id`, `userid`, `courseid`, `timeaccess`) VALUES
-(1, 2, 2, 1436952456),
-(2, 2, 4, 1436948539),
-(3, 2, 3, 1436948792);
+(1, 2, 2, 1436957970),
+(2, 2, 4, 1436958033),
+(3, 2, 3, 1436958003);
 
 -- --------------------------------------------------------
 

@@ -1,7 +1,7 @@
 <?php
     $capabilities = array(
  
-    'block/fontrecents:myaddinstance' => array(
+    'block/font_recents:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -11,7 +11,7 @@
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
  
-    'block/fontrecents:addinstance' => array(
+    'block/font_recents:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
  
         'captype' => 'write',
